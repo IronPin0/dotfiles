@@ -17,6 +17,8 @@ hypr()
 sddm()
 {
     echo "sddm"
+    cd ~/workspace/sddm-chili
+    ./deploy.sh
     cd ~/workspace/dotfiles
     sudo cp -rf ./sddm/sddm.conf.d /usr/lib/sddm/
     sudo cp -rf ./sddm/faces /usr/share/sddm/
@@ -39,6 +41,15 @@ then
     exit 1
 fi
 
+if [ $1 == "-i" ]
+then
+    install
+    waybar
+    hypr
+    sddm
+    exit 0
+fi
+
 if [ $1 == "-a" ]
 then
     waybar
@@ -47,11 +58,20 @@ then
     exit 0
 fi
 
-if [ $1 == "-i" ]
+if [ $1 == "-h" ]
 then
-    install
-    waybar
     hypr
+    exit 0
+fi
+
+if [ $1 == "-w" ]
+then
+    waybar
+    exit 0
+fi
+
+if [ $1 == "-s" ]
+then
     sddm
     exit 0
 fi
