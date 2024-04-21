@@ -15,7 +15,19 @@ hypr()
 sddm()
 {
     echo "sddm"
-    sudo cp -rf ./sddm /usr/lib/
+    sudo cp -rf ./sddm/sddm.conf.d /usr/lib/sddm/
+    cp -rf ./sddm/faces /usr/share/sddm/
+}
+
+install()
+{
+    echo "install"
+    cd ~ && mkdir workspace && cd workspace
+    sudo pacman -S --needed git base-devel 
+    git clone https://github.com/IronPin0/sddm-chili.git    
+    git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+    yay -S polkit-kde-agent mako xdg-desktop-portal-hyprland waybar qt5-quickcontrols qt5-graphicaleffects brave-bin visual-studio-code-bin 
+    
 }
 
 if [ $# -eq 0 ]
@@ -31,3 +43,14 @@ then
     sddm
     exit 0
 fi
+
+if [ $1 == "-i" ]
+then
+    install
+    waybar
+    hypr
+    sddm
+    exit 0
+fi
+
+echo "Arguments not valids"
