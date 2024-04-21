@@ -15,7 +15,7 @@ hypr()
 sddm()
 {
     echo "sddm"
-    cp -rf ./sddm /usr/lib/
+    sudo cp -rf ./sddm /usr/lib/
 }
 
 if [ $# -eq 0 ]
